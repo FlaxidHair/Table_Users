@@ -1,8 +1,8 @@
 <template>
 
     <div >
-        <v-container justify-center >
-            <v-container class="d-flex w-10" justify-space-between align-center>
+      <v-responsive>  
+
             <v-app-bar-title>
                 Обработанные
                 <v-btn icon>
@@ -18,7 +18,7 @@
             Действия 
           </v-btn>
         </template>
-        <v-list>
+        <v-list> 
           <v-list-tile
             v-for="(item, index) in items"
             :key="index"
@@ -28,13 +28,12 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-        </v-container>
         <v-data-table 
       :headers="headers"
       :items="desserts"
       :no-data-text="noDataText"
-      class="elevation-3 h-100" 
-      :height="500"
+      class="elevation-4 " 
+      height="70vh"
     >
     
       <template v-slot:items="props">
@@ -47,7 +46,7 @@
         
       </template>
     </v-data-table>
-</v-container>
+    </v-responsive>
     </div>
 </template>
 
