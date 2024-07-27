@@ -1,73 +1,84 @@
 <template>
     <div id="app">
-
-            <v-navigation-drawer
-      stateless
+      <v-navigation-drawer
+  stateless
       value="true"
     >
-      <v-list d-flex height="85vh">
+      <v-list d-flex>
         <v-list-group
-          prepend-icon="account_circle"
           value="true"
+          active-class="de"
         >
           <template v-slot:activator>
             <v-list-tile>
-              <v-list-tile-title>Users</v-list-tile-title>
+              <v-list-tile-title>Профили</v-list-tile-title>
             </v-list-tile>
           </template>
-          <v-list-group
-            no-action
-            sub-group
-            value="true"
+          <v-card
+      class="mx-auto"
+      max-width="300"
+      tile
+      height="90vh"
+    >
+      <v-list dense rounded>
+        <v-list-item-group
+          v-model="selectedItem"
+          color="primary"
+        >
+        <router-link to="/" activeClass="red" style="text-decoration:none; " isActive >
+          <v-list-item
+          
+        >
+            <v-list-item-icon>
+            <v-icon v-text="'mdi-check-circle'" color="blue"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="'Все'"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="/Checked" style="text-decoration:none; ">
+          <v-list-item 
           >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Admin</v-list-tile-title>
-              </v-list-tile>
-            </template>
-  
-            <v-list-tile
-              v-for="(admin, i) in admins"
-              :key="i"
-              @click="stop"
-            >
-              <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="admin[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
-  
-          <v-list-group
-            sub-group
-            no-action
+          
+            <v-list-item-icon>
+            <v-icon v-text="'mdi-check-circle'"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="'Обработанные'"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="/noChecked" style="text-decoration:none">
+          <v-list-item
           >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Actions</v-list-tile-title>
-              </v-list-tile>
-            </template>
-            <v-list-tile
-              v-for="(crud, i) in cruds"
-              :key="i"
-              @click="stop"
-            >
-              <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="crud[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
+          
+            <v-list-item-icon>
+            <v-icon v-text="'mdi-alert-circle'"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="'Не обработанные'"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-
 </div>
 </template>
 
 <script>
     export default {
-        
+      methods:{
+        activeUsers(route,id) {
+          if(route === '/') {
+            
+          }
+        }
+      }
     }
 </script>
 
