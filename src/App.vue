@@ -29,6 +29,7 @@
       class="mx-auto"
       max-width="300"
       tile
+      height="90vh"
     >
       <v-list dense>
         <v-list-item-group
@@ -78,26 +79,22 @@
           </v-list-tile>
         </v-list>
       </v-menu></v-container>
-    <v-data-table
+      <v-data-table
       :headers="headers"
-      :items="desserts"
-      class="elevation-3"
-      height="80vh" 
-    >
-      <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
-      </template>
-    </v-data-table>
+      :items="$store.getters.getUserss"
+      :items-per-page="5"
+      class="elevation-1"
+    ></v-data-table>
   </v-container>
   </div>
 </div>
-  </v-app>
+<div  >
+
 </div>
+  </v-app>
+  
+</div>
+
 </template>
 
 <script>
@@ -111,28 +108,20 @@ export default {
   // }
   data(){
             return {
-               headers:[{
-                text: 'Имя',
-                sortable:false,
-               },{
-                text: 'Фамилия',
-                sortable:false,
-               },{
-                text: 'Компания',
-                sortable:false,
-               },{
-                text: 'Специальность',
-                sortable:false,
-               },{
-                text: 'Телефон',
-                sortable:false,
-               },{
-                text: 'E-mail',
-                sortable:false,
-               },{
-                text: 'Интересы',
-                sortable:false,
-               }],
+              headers: [
+        {
+          text: 'Имя',
+          align: 'start',
+          sortable: false,
+          value: 'firstName',
+        },
+        { text: 'Фамилия', value: 'lastName' },
+        { text: 'Компания', value: 'company' },
+        { text: 'Специальность', value: 'jobTitle' },
+        { text: 'Телефон', value: 'phone' },
+        { text: 'E-mail', value: 'email' },
+        { text: 'Интересы', value: 'interests' },
+      ],
                noDataText:'Нет пользователей',
                items: [
         { text: 'Все', icon: 'mdi-check-circle' },
@@ -141,5 +130,9 @@ export default {
       ],
             } 
         },
+        mounted(){
+          this.$store.dispatch('getUsers')
+          console.log(this.$store.getters.getUserss)
+        }
 }
 </script>
