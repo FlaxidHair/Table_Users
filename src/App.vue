@@ -14,7 +14,7 @@
   
 </div>
 
-</template>
+</template>+3
 
 <script>
 import Appbar from'./components/app-bar.vue'
@@ -23,6 +23,9 @@ export default {
   name:'App',
   components:{
     Appbar,AppAside
-  }
+  },
+  mounted() {
+           this.$store.dispatch('getUsers')
+        },
 }
 </script>

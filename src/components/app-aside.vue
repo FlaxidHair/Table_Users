@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-      <v-navigation-drawer
+      <v-navigation-drawer v-show="$store.state.isShow"
   stateless
       value="true"
     >
@@ -25,8 +25,8 @@
           v-model="selectedItem"
           color="primary"
         >
-        <router-link to="/" activeClass="red" style="text-decoration:none; " isActive >
-          <v-list-item
+        <router-link to="/" style="text-decoration:none; " >
+          <v-list-item ref='list1' 
           
         >
             <v-list-item-icon>
@@ -38,7 +38,7 @@
           </v-list-item>
         </router-link>
         <router-link to="/Checked" style="text-decoration:none; ">
-          <v-list-item 
+          <v-list-item ref='list2' 
           >
           
             <v-list-item-icon>
@@ -50,7 +50,7 @@
           </v-list-item>
         </router-link>
         <router-link to="/noChecked" style="text-decoration:none">
-          <v-list-item
+          <v-list-item ref='list3' 
           >
           
             <v-list-item-icon>
@@ -72,13 +72,12 @@
 
 <script>
     export default {
-      methods:{
-        activeUsers(route,id) {
-          if(route === '/') {
-            
-          }
-        }
-      }
-    }
+     
+     } 
+
+
+      
+    
+    
 </script>
 

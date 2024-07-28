@@ -1,8 +1,6 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-// import axios from "axios";
-import tableStore from "./tableStore.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,7 +10,7 @@ export default new Vuex.Store({
       { text: "Обработанные", icon: "mdi-check-circle" },
       { text: "Не обработанные", icon: "mdi-alert-circle" },
     ],
-    itemsInner: [
+    itemsInnerStatus: [
       {
         text: "Статус",
         align: "start",
@@ -28,15 +26,43 @@ export default new Vuex.Store({
       { text: "E-mail", value: "email", sortable: false },
       { text: "Интересы", value: "interests", sortable: false },
     ],
+    itemsInner: [
+      { text: "Имя", align: "start", sortable: false, value: "firstName" },
+      { text: "Фамилия", value: "lastName", sortable: false },
+      { text: "Компания", value: "company", sortable: false },
+      { text: "Специальность", value: "jobTitle", sortable: false },
+      { text: "Телефон", value: "phone", sortable: false },
+      { text: "E-mail", value: "email", sortable: false },
+      { text: "Интересы", value: "interests", sortable: false },
+    ],
     noDataText: "Нет пользователей",
     items: [],
+    activeItems: [],
+    unActiveItems: [],
+    actionsTable: [
+      {
+        title: "Добавить",
+      },
+    ],
+    selected: [],
+    isShow: false,
   },
   getters: {
     getUserss(state) {
-      state.items.forEach((el) => {
-        el.status == true ? "1" : "2";
-      });
       return state.items;
+    },
+    getUserssActive(state) {
+      state.activeItems = state.items.filter((el) => {
+        return el.status == true;
+      });
+      return state.activeItems;
+    },
+    getUserssUnActive(state) {
+      state.unActiveItems = state.items.filter((el) => {
+        return el.status == false;
+      });
+
+      return state.unActiveItems;
     },
   },
   mutations: {
@@ -44,7 +70,10 @@ export default new Vuex.Store({
       state.items = payload;
     },
     reloadUI() {
-      window.location.reload();
+      console.log(this.$refs.table);
+    },
+    isShowing(state) {
+      state.isShow === true ? (state.isShow = false) : (state.isShow = true);
     },
   },
   actions: {
@@ -53,8 +82,5 @@ export default new Vuex.Store({
         .get("https://retoolapi.dev/D6xLg4/data")
         .then((response) => context.commit("setUser", response.data));
     },
-  },
-  modules: {
-    tableStore,
   },
 });
