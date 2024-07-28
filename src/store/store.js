@@ -75,6 +75,13 @@ export default new Vuex.Store({
     isShowing(state) {
       state.isShow === true ? (state.isShow = false) : (state.isShow = true);
     },
+    rowClick(state, el) {
+      if (state.selected.includes(el)) {
+        state.selected.splice(el, 1);
+      } else {
+        state.selected.push(el);
+      }
+    },
   },
   actions: {
     getUsers(context) {

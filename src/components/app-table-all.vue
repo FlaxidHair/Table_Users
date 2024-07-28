@@ -32,11 +32,11 @@
       :items="$store.getters.getUserss"
       :items-per-page="5"
       class="elevation-1"
-      :value="$store.state.selected"
-      show-select
       v-model="$store.state.selected"
+      @click:row="$store.commit('rowClick',$event
+      )"
     >
-      <template v-slot:[`item.status`]="{ item }">
+      <template v-slot:[`item.status`]="{ item }" >
         <div v-if="item.status==true">
           <v-icon color="blue">mdi-cloud-check</v-icon>
         </div>
