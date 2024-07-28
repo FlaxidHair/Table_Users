@@ -25,7 +25,9 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <h4>{{ $store.state.selected }}</h4>
+      <h4 v-for="item in $store.state.selected" :key="item">
+        {{ item }}
+      </h4>
     </v-container>
       <v-data-table
       :headers="$store.state.itemsInnerStatus"
@@ -45,6 +47,7 @@
         </div>
       </template>
   </v-data-table>
+  <v-btn @click="$store.dispatch('postUsers')">123</v-btn>
   </v-container>
     </div>
 </template>

@@ -39,11 +39,7 @@ export default new Vuex.Store({
     items: [],
     activeItems: [],
     unActiveItems: [],
-    actionsTable: [
-      {
-        title: "Добавить",
-      },
-    ],
+    deleteItem: null,
     selected: [],
     isShow: false,
   },
@@ -61,33 +57,52 @@ export default new Vuex.Store({
       state.unActiveItems = state.items.filter((el) => {
         return el.status == false;
       });
-
       return state.unActiveItems;
+    },
+    getId(state) {
+      return state.deleteItem;
     },
   },
   mutations: {
     setUser(state, payload) {
       state.items = payload;
     },
-    reloadUI() {
-      console.log(this.$refs.table);
+    reloadUI(state) {
+      console.log(state.deleteItem);
     },
     isShowing(state) {
       state.isShow === true ? (state.isShow = false) : (state.isShow = true);
     },
     rowClick(state, el) {
-      if (state.selected.includes(el)) {
-        state.selected.splice(el, 1);
-      } else {
+      // if (state.selected.includes(el)) {
+      //   state.selected.splice(el, 1);
+      // } else {
+      //   state.selected.push(el);
+      // }
+
+      if (state.selected.includes(el) != el) {
+        state.selected.splice(0, 1);
         state.selected.push(el);
       }
+      state.selected.forEach((el) => {
+        state.deleteItem = el.id;
+      });
     },
   },
+
   actions: {
     getUsers(context) {
       axios
-        .get("https://retoolapi.dev/D6xLg4/data")
+        .get("https://retoolapi.dev/1KJKFH/data")
         .then((response) => context.commit("setUser", response.data));
+    },
+    postUsers(state) {
+      axios
+        .delete(`https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`)
+        .then(() => {
+          alert("Deleted");
+        })
+        .catch((error) => console.log(error));
     },
   },
 });
