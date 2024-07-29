@@ -30,7 +30,7 @@
           
         >
             <v-list-item-icon>
-            <v-icon v-text="'mdi-check-circle'" color="blue"></v-icon>
+            <v-icon v-text="'mdi-check-circle'"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title v-text="'Все'"></v-list-item-title>

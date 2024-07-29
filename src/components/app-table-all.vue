@@ -5,24 +5,26 @@
       <v-toolbar-title >Все<v-btn icon @click="$store.commit('reloadUI')">
                 <v-icon color="blue" >refresh</v-icon>
                 </v-btn></v-toolbar-title>
+                <v-row justify="end">
                 <v-col
           class="d-flex"
-          cols=""
-          sm="1"
+          sm="2"
         >
           <v-select
+          filled
             label="Действия"
             v-model="$store.state.actionsSelect"
             :items="$store.state.itemChoose"
             background-color="blue"
             color="blue"
-            
+            style="height:50px;"
           >  
           <template v-slot:item="{ item }">
       <div style="padding:10px 45px 10px 45px;" @click="$store.commit('actionsChange',item)">{{ item }}</div>
     </template>
         </v-select>
         </v-col>
+      </v-row>
     </v-container>
       <v-data-table
       :headers="$store.state.itemsInnerStatus"
@@ -43,6 +45,7 @@
       </template>
   </v-data-table>
   </v-container>
+  {{ $store.getters.getUserS }} {{ $store.getters.takeInfo }} {{ $store.state.fName }}
     </div>
 </template>
 

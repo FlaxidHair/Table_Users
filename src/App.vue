@@ -8,13 +8,25 @@
 <router-view></router-view>
 
   </div>
+  <v-dialog v-model="dialog">
+    <template v-slot:activator="{ on }">
+          <v-btn
+            color="red lighten-2"
+            dark
+            v-on="on"
+          >
+            Click Me
+          </v-btn>
+        </template>
+      
+  </v-dialog>
 </div>
 
   </v-app>
   
 </div>
 
-</template>+3
+</template>
 
 <script>
 import Appbar from'./components/app-bar.vue'
@@ -27,5 +39,11 @@ export default {
   mounted() {
            this.$store.dispatch('getUsers')
         },
+        data(){
+          return {
+            dialog:false,
+          }
+        }
+  
 }
 </script>

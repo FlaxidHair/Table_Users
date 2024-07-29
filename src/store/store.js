@@ -5,6 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    fName: "",
+    lName: "",
+    company: "",
+    jobTitle: "",
+    phone: "",
+    email: "",
+    interest: "",
+    findedPerson: [],
     nameHeaders: [
       { text: "Все", icon: "mdi-check-circle" },
       { text: "Обработанные", icon: "mdi-check-circle" },
@@ -49,6 +57,9 @@ export default new Vuex.Store({
     getUserss(state) {
       return state.items;
     },
+    getUserS(state) {
+      return state.findedPerson;
+    },
     getUserssActive(state) {
       state.activeItems = state.items.filter((el) => {
         return el.status == true;
@@ -64,10 +75,16 @@ export default new Vuex.Store({
     getId(state) {
       return state.deleteItem;
     },
+    takeInfo(state) {
+      return state.fName;
+    },
   },
   mutations: {
     setUser(state, payload) {
       state.items = payload;
+    },
+    finded(state, payload) {
+      state.findedPerson = payload;
     },
     reloadUI(state) {
       console.log(state.deleteItem);
@@ -100,7 +117,6 @@ export default new Vuex.Store({
       if (el === "Добавить") {
         alert(3);
       }
-      console.log(el);
     },
   },
 
@@ -117,6 +133,13 @@ export default new Vuex.Store({
           alert("Deleted");
         })
         .catch((error) => console.log(error));
+    },
+    findUsers(context) {
+      axios
+        .get(
+          `https://retoolapi.dev/1KJKFH/data?firstName=${this.getters.takeInfo}`
+        )
+        .then((response) => context.commit("finded", response.data));
     },
   },
 });
