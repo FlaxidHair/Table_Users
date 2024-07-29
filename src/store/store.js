@@ -14,6 +14,14 @@ export default new Vuex.Store({
     email: "",
     interest: "",
     findedPerson: [],
+    items: [],
+    activeItems: [],
+    unActiveItems: [],
+    selected: [],
+    deleteItem: null,
+    isShow: false,
+    actionsSelect: null,
+    itemChoose: ["Изменить", "Удалить", "Добавить"],
     nameHeaders: [
       { text: "Все", icon: "mdi-check-circle" },
       { text: "Обработанные", icon: "mdi-check-circle" },
@@ -43,21 +51,12 @@ export default new Vuex.Store({
       { text: "E-mail", value: "email", sortable: false },
       { text: "Интересы", value: "interests", sortable: false },
     ],
-    noDataText: "Нет пользователей",
-    items: [],
-    activeItems: [],
-    unActiveItems: [],
-    deleteItem: null,
-    selected: [],
-    isShow: false,
-    actionsSelect: null,
-    itemChoose: ["Изменить", "Удалить", "Добавить"],
   },
   getters: {
     getUserss(state) {
       return state.items;
     },
-    getUserS(state) {
+    getUsers(state) {
       return state.findedPerson;
     },
     getUserssActive(state) {
@@ -110,9 +109,6 @@ export default new Vuex.Store({
     finded(state, payload) {
       state.findedPerson = payload;
     },
-    reloadUI(state) {
-      console.log(state.deleteItem);
-    },
     isShowing(state) {
       state.isShow === true ? (state.isShow = false) : (state.isShow = true);
     },
@@ -160,9 +156,6 @@ export default new Vuex.Store({
     },
     findUsers(context) {
       this.commit("isShowingSearch");
-      // if (!this.getters.takeInfo.fName) {
-      //   return;
-      // }
       axios
         .get(
           `${

@@ -21,7 +21,7 @@
             <v-list-tile>
               <v-list-tile-content>
                 <v-form>
-                  <v-text-field :rules="[rules.required, rules.min]" outlined v-model="$store.state.fName"  label="Имя"></v-text-field>
+                  <v-text-field outlined v-model="$store.state.fName"  label="Имя"></v-text-field>
                   <v-text-field outlined v-model="$store.state.lName" label="Фамилия"></v-text-field>
                   <v-text-field outlined v-model="$store.state.company" label="Компания"></v-text-field>
                   <v-text-field outlined v-model="$store.state.jobTitle" label="Специальность"></v-text-field>
@@ -47,16 +47,6 @@
 </template>
 
 <script>
-    export default {
-      data(){
-        return {
-          rules: {
-        required: value => !!value || 'Введите имя.',
-        min: v => v.length >= 8 || 'Min 8 characters',
-        emailMatch: () => (`The email and password you entered don't match`),
-      },
-        }
-      }
-    }
+
 
 </script>
