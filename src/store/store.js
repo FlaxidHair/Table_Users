@@ -25,7 +25,6 @@ export default new Vuex.Store({
         align: "start",
         sortable: false,
         value: "status",
-        icon: "status",
       },
       { text: "Имя", align: "start", sortable: false, value: "firstName" },
       { text: "Фамилия", value: "lastName", sortable: false },
@@ -188,7 +187,7 @@ export default new Vuex.Store({
               : this.getters.takeInfo.interest
               ? "//retoolapi.dev/1KJKFH/data?interests=" +
                 this.getters.takeInfo.interest
-              : null
+              : "//retoolapi.dev/1KJKFH/data"
           }`
         )
         .then((response) => context.commit("finded", response.data)) ||
