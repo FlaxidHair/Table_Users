@@ -42,6 +42,8 @@ export default new Vuex.Store({
     deleteItem: null,
     selected: [],
     isShow: false,
+    actionsSelect: null,
+    itemChoose: ["Изменить", "Удалить", "Добавить"],
   },
   getters: {
     getUserss(state) {
@@ -88,6 +90,18 @@ export default new Vuex.Store({
         state.deleteItem = el.id;
       });
     },
+    actionsChange(_, el) {
+      if (el === "Удалить") {
+        this.dispatch("deleteUsers");
+      }
+      if (el === "Изменить") {
+        alert(1);
+      }
+      if (el === "Добавить") {
+        alert(3);
+      }
+      console.log(el);
+    },
   },
 
   actions: {
@@ -96,7 +110,7 @@ export default new Vuex.Store({
         .get("https://retoolapi.dev/1KJKFH/data")
         .then((response) => context.commit("setUser", response.data));
     },
-    postUsers(state) {
+    deleteUsers(state) {
       axios
         .delete(`https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`)
         .then(() => {
