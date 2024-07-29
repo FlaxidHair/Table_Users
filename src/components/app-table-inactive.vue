@@ -32,6 +32,7 @@
         </v-row>
       </v-container>
       {{ $store.state.actionsSelect }}
+      <div v-if="!$store.state.isFind">
       <v-data-table
         :headers="$store.state.itemsInner"
         :items="$store.getters.getUserssUnActive"
@@ -41,6 +42,7 @@
         @click:row="$store.commit('rowClick', $event)"
       >
       </v-data-table>
+    </div>
     </v-container>
   </div>
 </template>
