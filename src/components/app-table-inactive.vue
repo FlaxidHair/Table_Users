@@ -4,7 +4,7 @@
       <v-container d-flex justify-space-between>
         <v-toolbar-title
           >Не обработанные
-          <v-btn icon @click="$store.commit('reloadUI')">
+          <v-btn icon @click="$router.go(0)">
             <v-icon color="blue">refresh</v-icon>
           </v-btn>
         </v-toolbar-title>

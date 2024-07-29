@@ -37,7 +37,7 @@ export default {
     Appbar,AppAside
   },
   mounted() {
-           this.$store.dispatch('getUsers')
+      this.$store.dispatch('getUsers')    
         },
         data(){
           return {

@@ -2,7 +2,7 @@
 <div>
   <v-container fluid style="width:85vw;">
       <v-container d-flex justify-space-between>
-      <v-toolbar-title >Обработанные<v-btn icon @click="$store.commit('reloadUI')">
+      <v-toolbar-title >Обработанные<v-btn icon @click="$router.go(0)">
                 <v-icon color="blue" >refresh</v-icon>
                 </v-btn></v-toolbar-title>
                 <v-row justify="end">

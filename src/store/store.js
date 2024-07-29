@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isFind: null,
     fName: "",
     lName: "",
     company: "",
@@ -76,10 +77,34 @@ export default new Vuex.Store({
       return state.deleteItem;
     },
     takeInfo(state) {
-      return state.fName;
+      return {
+        fName: state.fName,
+        lName: state.lName,
+        company: state.company,
+        jobTitle: state.jobTitle,
+        phone: state.phone,
+        email: state.email,
+        interest: state.interest,
+      };
     },
   },
   mutations: {
+    isShowingSearch(state) {
+      this.getters.takeInfo.values != ""
+        ? (state.isFind = true)
+        : (state.isFind = false);
+    },
+
+    clearSearch(state) {
+      state.fName = "";
+      state.lName = "";
+      state.company = "";
+      state.jobTitle = "";
+      state.phone = "";
+      state.email = "";
+      state.interest = "";
+      state.isFind = false;
+    },
     setUser(state, payload) {
       state.items = payload;
     },
@@ -135,11 +160,48 @@ export default new Vuex.Store({
         .catch((error) => console.log(error));
     },
     findUsers(context) {
+      this.commit("isShowingSearch");
+      // if (!this.getters.takeInfo.fName) {
+      //   return;
+      // }
       axios
         .get(
-          `https://retoolapi.dev/1KJKFH/data?firstName=${this.getters.takeInfo}`
+          `${
+            this.getters.takeInfo.fName
+              ? "//retoolapi.dev/1KJKFH/data?firstName=" +
+                this.getters.takeInfo.fName
+              : this.getters.takeInfo.lName
+              ? "//retoolapi.dev/1KJKFH/data?lastName=" +
+                this.getters.takeInfo.lName
+              : this.getters.takeInfo.company
+              ? "//retoolapi.dev/1KJKFH/data?company=" +
+                this.getters.takeInfo.company
+              : this.getters.takeInfo.jobTitle
+              ? "//retoolapi.dev/1KJKFH/data?jobTitle=" +
+                this.getters.takeInfo.jobTitle
+              : this.getters.takeInfo.phone
+              ? "//retoolapi.dev/1KJKFH/data?phone=" +
+                this.getters.takeInfo.phone
+              : this.getters.takeInfo.email
+              ? "//retoolapi.dev/1KJKFH/data?email=" +
+                this.getters.takeInfo.email
+              : this.getters.takeInfo.interest
+              ? "//retoolapi.dev/1KJKFH/data?interests=" +
+                this.getters.takeInfo.interest
+              : null
+          }`
         )
-        .then((response) => context.commit("finded", response.data));
+        .then((response) => context.commit("finded", response.data)) ||
+        axios
+          .get(
+            `${
+              this.getters.takeInfo.lName
+                ? "//retoolapi.dev/1KJKFH/data?lastName=" +
+                  this.getters.takeInfo.lName
+                : this.getters.takeInfo.lName
+            }`
+          )
+          .then((response) => context.commit("finded", response.data));
     },
   },
 });
