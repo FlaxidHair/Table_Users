@@ -13,6 +13,16 @@ export default new Vuex.Store({
     phone: "",
     email: "",
     interest: "",
+    newUser: {
+      firstName: "",
+      lastName: "",
+      company: "",
+      jobTitle: "",
+      phone: "",
+      email: "",
+      interests: "",
+      status: "",
+    },
     findedPerson: [],
     items: [],
     activeItems: [],
@@ -56,8 +66,8 @@ export default new Vuex.Store({
     ],
   },
   getters: {
-    modalStatus(state) {
-      return (state.isEdit = false);
+    getNewUser(state) {
+      return state.newUser;
     },
     getEditItem(state) {
       return state.editItem;
@@ -122,11 +132,6 @@ export default new Vuex.Store({
       state.isShow === true ? (state.isShow = false) : (state.isShow = true);
     },
     rowClick(state, el) {
-      // if (state.selected.includes(el)) {
-      //   state.selected.splice(el, 1);
-      // } else {
-      //   state.selected.push(el);
-      // }
       if (state.selected.includes(el) != el) {
         state.selected.splice(0, 1);
         state.selected.push(el);
@@ -146,7 +151,7 @@ export default new Vuex.Store({
         }
       }
       if (el === "Добавить") {
-        alert(3);
+        state.isAdd = true;
       }
     },
   },
@@ -156,6 +161,9 @@ export default new Vuex.Store({
       axios
         .get("https://retoolapi.dev/1KJKFH/data")
         .then((response) => context.commit("setUser", response.data));
+    },
+    addNewUser(state) {
+      axios.post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser);
     },
     deleteUsers(state) {
       axios
@@ -201,17 +209,7 @@ export default new Vuex.Store({
               : "//retoolapi.dev/1KJKFH/data"
           }`
         )
-        .then((response) => context.commit("finded", response.data)) ||
-        axios
-          .get(
-            `${
-              this.getters.takeInfo.lName
-                ? "//retoolapi.dev/1KJKFH/data?lastName=" +
-                  this.getters.takeInfo.lName
-                : this.getters.takeInfo.lName
-            }`
-          )
-          .then((response) => context.commit("finded", response.data));
+        .then((response) => context.commit("finded", response.data));
     },
   },
 });
