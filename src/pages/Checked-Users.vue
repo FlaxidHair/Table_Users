@@ -1,15 +1,14 @@
 <template>
     <div>
-<Checked></Checked>
+        <Checked></Checked>
     </div>
 </template>
 
 <script>
 import Checked from '../components/app-table-active.vue'
-    export default {
-        components:{
-            Checked
-        }
+export default {
+    components: {
+        Checked
     }
+}
 </script>
-

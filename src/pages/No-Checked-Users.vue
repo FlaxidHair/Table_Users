@@ -1,14 +1,14 @@
 <template>
     <div>
-<UnChecked></UnChecked>
+        <UnChecked></UnChecked>
     </div>
 </template>
 
 <script>
 import UnChecked from '../components/app-table-inactive.vue'
-    export default {
-        components:{
-            UnChecked
-        }
+export default {
+    components: {
+        UnChecked
     }
+}
 </script>

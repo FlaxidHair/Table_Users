@@ -14,7 +14,7 @@
                         label="Интересы"></v-text-field>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary">Сохранить</v-btn>
+                        <v-btn color="primary" @click="$store.dispatch('editUsers')">Сохранить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -24,5 +24,6 @@
 
 <script>
 export default {
+
 }
 </script>

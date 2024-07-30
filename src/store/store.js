@@ -163,7 +163,15 @@ export default new Vuex.Store({
         .then((response) => context.commit("setUser", response.data));
     },
     addNewUser(state) {
-      axios.post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser);
+      if (Object.values(state.getters.getNewUser).includes("")) {
+        return;
+      } else {
+        axios.post(
+          "https://retoolapi.dev/1KJKFH/data",
+          state.getters.getNewUser
+        );
+        alert("Пользователь добавлен");
+      }
     },
     deleteUsers(state) {
       axios
@@ -178,7 +186,7 @@ export default new Vuex.Store({
         `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
         state.getters.getEditItem
       );
-      state.is;
+      alert("Пользователь изменен");
     },
     findUsers(context) {
       this.commit("isShowingSearch");
