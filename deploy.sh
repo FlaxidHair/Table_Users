@@ -1,25 +1,25 @@
 #!/usr/bin/env sh
 
-# abort on errors
+# остановить публикацию при ошибках
 set -e
 
-# build
+# сборка
 npm run build
 
-# navigate into the build output directory
+# переход в каталог сборки
 cd dist
 
-# if you are deploying to a custom domain
+# если вы публикуете на пользовательский домен
 # echo 'www.example.com' > CNAME
 
 git init
 git add -A
 git commit -m 'deploy'
 
-# if you are deploying to https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
+# если вы публикуете по адресу https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
-# if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:flaxidhair/test.git main:gh-pages
+# если вы публикуете по адресу https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:flaxidhair/test.git master:gh-pages
 
 cd -

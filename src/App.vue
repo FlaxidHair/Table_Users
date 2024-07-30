@@ -39,6 +39,5 @@ export default {
             dialog:false,
           }
         }
-  
 }
 </script>
