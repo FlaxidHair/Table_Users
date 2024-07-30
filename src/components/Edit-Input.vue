@@ -1,8 +1,11 @@
 <template>
     <div>
-
-        <v-card style="width:600px;padding:40px; ">
-        <v-form d-flex>
+        <!-- <v-dialog v-model="$store.state.isEdit" width="500">
+    <v-overlay absolute opacity="0.2" >
+     <v-row justify="center">
+        <v-col cols="auto" :width="3000" dense>
+            <v-card>
+                <v-form  ref="overlay" >
                   <v-text-field outlined v-model="$store.getters.getEditItem.firstName" label="Имя"></v-text-field>
                   <v-text-field outlined v-model="$store.getters.getEditItem.lastName" label="Фамилия"></v-text-field>
                   <v-text-field outlined v-model="$store.getters.getEditItem.company" label="Компания"></v-text-field>
@@ -11,12 +14,45 @@
                   <v-text-field outlined v-model="$store.getters.getEditItem.email" label="E-mail"></v-text-field>
                   <v-text-field outlined v-model="$store.getters.getEditItem.interests" label="Интересы"></v-text-field>
                   <v-btn color="primary" @click="$store.dispatch('editUsers')">Сохранить</v-btn>
-                  {{$store.getters.getEditItem}}
                 </v-form>
-                
-        </v-card>
+            </v-card>
+ </v-col>
+</v-row>
+</v-overlay>
+</v-dialog> -->
 
+
+<div>
+      <v-dialog
+        v-model="$store.state.isEdit"
+        width="600"
+      >
+        <v-card style="padding:20px;">
+                  <v-text-field outlined v-model="$store.getters.getEditItem.firstName" label="Имя"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.lastName" label="Фамилия"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.company" label="Компания"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.jobTitle" label="Специальность"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.phone" label="Телефон"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.email" label="E-mail"></v-text-field>
+                  <v-text-field outlined v-model="$store.getters.getEditItem.interests" label="Интересы"></v-text-field>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="$store.dispatch('editUsers')">Сохранить</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
+
+
+
+
+
+
+
+
+
+
+</div>
 </template>
 
 <script>
@@ -24,6 +60,11 @@
         data(){
             return {
                 methods:{
+                    showModal(){
+                        console.log(this.$ref.overlay)
+                    }
+                },
+                computed:{
 
                 }
             }

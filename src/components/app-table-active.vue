@@ -17,7 +17,7 @@
         </v-row>
       </v-container>
       <div v-if="$store.state.isFind">
-        <v-data-table :headers="$store.state.itemsInner" :items="$store.getters.getUserS" :items-per-page="5"
+        <v-data-table :headers="$store.state.itemsInner" :items="$store.getters.getUserFinded" :items-per-page="5"
           class="elevation-1" v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event
           )">
         </v-data-table>

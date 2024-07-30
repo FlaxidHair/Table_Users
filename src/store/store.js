@@ -19,6 +19,7 @@ export default new Vuex.Store({
     unActiveItems: [],
     selected: [],
     isEdit: false,
+    isAdd: false,
     deleteItem: null,
     editItem: null,
     isShow: false,
@@ -55,13 +56,16 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    modalStatus(state) {
+      return (state.isEdit = false);
+    },
     getEditItem(state) {
       return state.editItem;
     },
     getUserss(state) {
       return state.items;
     },
-    getUserS(state) {
+    getUserFinded(state) {
       return state.findedPerson;
     },
     getUserssActive(state) {
@@ -123,7 +127,6 @@ export default new Vuex.Store({
       // } else {
       //   state.selected.push(el);
       // }
-
       if (state.selected.includes(el) != el) {
         state.selected.splice(0, 1);
         state.selected.push(el);
@@ -138,7 +141,9 @@ export default new Vuex.Store({
         this.dispatch("deleteUsers");
       }
       if (el === "Изменить") {
-        state.isEdit = true;
+        if (state.selected.length > 0) {
+          state.isEdit = true;
+        }
       }
       if (el === "Добавить") {
         alert(3);
@@ -165,6 +170,7 @@ export default new Vuex.Store({
         `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
         state.getters.getEditItem
       );
+      state.is;
     },
     findUsers(context) {
       this.commit("isShowingSearch");

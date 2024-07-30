@@ -3,7 +3,7 @@
   <v-app id="inspire">
     <div>
   <Appbar></Appbar>
-  <div style="padding:20px; position:absolute;display:flex;left:50%;transform:translate(-50%);">
+  <div>
     <EditInput></EditInput>
   </div>
   
