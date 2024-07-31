@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    componentKey: 0,
     isFind: null,
     fName: "",
     lName: "",
@@ -106,6 +107,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    reloadUI() {
+      this.$router.go(0);
+    },
     isShowingSearch(state) {
       this.getters.takeInfo.values != ""
         ? (state.isFind = true)
@@ -143,7 +147,9 @@ export default new Vuex.Store({
     },
     actionsChange(state, el) {
       if (el === "Удалить") {
-        this.dispatch("deleteUsers");
+        if (state.selected.length > 0) {
+          this.dispatch("deleteUsers");
+        }
       }
       if (el === "Изменить") {
         if (state.selected.length > 0) {
@@ -166,26 +172,34 @@ export default new Vuex.Store({
       if (Object.values(state.getters.getNewUser).includes("")) {
         return;
       } else {
-        axios.post(
-          "https://retoolapi.dev/1KJKFH/data",
-          state.getters.getNewUser
-        );
-        alert("Пользователь добавлен");
+        axios
+          .post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser)
+          .finally(() => {
+            window.history.go(0);
+            alert("Пользователь добавлен");
+          });
       }
     },
     deleteUsers(state) {
       axios
         .delete(`https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`)
         .then(() => {
-          alert("Deleted");
+          alert("Пользователь удален");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => {
+          window.history.go(0);
+        });
     },
     editUsers(state) {
-      axios.patch(
-        `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
-        state.getters.getEditItem
-      );
+      axios
+        .patch(
+          `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
+          state.getters.getEditItem
+        )
+        .finally(() => {
+          window.history.go(0);
+        });
       alert("Пользователь изменен");
     },
     findUsers(context) {

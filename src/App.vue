@@ -3,13 +3,14 @@
     <v-app id="inspire">
       <div>
         <Appbar></Appbar>
-        <div>
           <EditInput></EditInput>
           <AddInput></AddInput>
-        </div>
-        <v-flex d-flex>
-          <AppAside></AppAside>
-          <router-view></router-view>
+        <v-flex class="d-flex">
+            <AppAside class="mr-auto"></AppAside>
+          <div class="d-flex justify-end">
+            <router-view></router-view>
+          </div>
+
         </v-flex>
       </div>
     </v-app>
