@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    componentKey: 0,
     isFind: null,
     fName: "",
     lName: "",
@@ -107,11 +106,8 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    reloadUI() {
-      this.$router.go(0);
-    },
     isShowingSearch(state) {
-      this.getters.takeInfo.values != ""
+      this.getters.takeInfo != ""
         ? (state.isFind = true)
         : (state.isFind = false);
     },

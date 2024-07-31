@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container fluid style="width:84vw;" elevation-2 class="mt-3"> 
+    <v-container fluid style="width:84vw;" elevation-2 class="mt-3">
       <v-container d-flex justify-space-between>
         <v-toolbar-title>Обработанные<v-btn icon @click="$router.go(0)">
             <v-icon color="primary">refresh</v-icon>
@@ -17,14 +17,14 @@
         </v-row>
       </v-container>
       <div v-if="$store.state.isFind">
-        <v-data-table height="70vh" :headers="$store.state.itemsInner" :items="$store.getters.getUserFinded" :items-per-page="5"
-           v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event
+        <v-data-table height="70vh" :headers="$store.state.itemsInner" :items="$store.getters.getUserFinded"
+          :items-per-page="5" v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event
           )">
         </v-data-table>
       </div>
       <div v-if="!$store.state.isFind">
-        <v-data-table height="70vh" ref="table" :headers="$store.state.itemsInner" :items="$store.getters.getUserssActive"
-          :items-per-page="5" v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event
+        <v-data-table height="70vh" ref="table" :headers="$store.state.itemsInner"
+          :items="$store.getters.getUserssActive" :items-per-page="5" v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event
           )">
 
         </v-data-table>

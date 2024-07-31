@@ -11,10 +11,10 @@
             </v-btn>
           </template>
           <div>
-          <v-card class="pa-5 d-flex flex-column" width="430px" height="80vh">
-            <v-list class="mb-auto">
-              <v-list-tile>
-                <v-list-tile-content>
+            <v-card class="pa-5 d-flex flex-column" width="430px" height="80vh">
+              <v-list class="mb-auto">
+                <v-list-tile>
+                  <v-list-tile-content>
                     <v-text-field outlined v-model="$store.state.fName" label="Имя"></v-text-field>
                     <v-text-field outlined v-model="$store.state.lName" label="Фамилия"></v-text-field>
                     <v-text-field outlined v-model="$store.state.company" label="Компания"></v-text-field>
@@ -22,16 +22,16 @@
                     <v-text-field outlined v-model="$store.state.phone" label="Телефон"></v-text-field>
                     <v-text-field outlined v-model="$store.state.email" label="E-mail"></v-text-field>
                     <v-text-field outlined v-model="$store.state.interest" label="Интересы"></v-text-field>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-            <v-card-actions class="d-flex align-end">
-              <v-spacer></v-spacer>
-              <v-btn flat @click="$store.commit('clearSearch')">Очистить</v-btn>
-              <v-btn color="primary" flat @click="$store.dispatch('findUsers')">Применить</v-btn>
-            </v-card-actions>
-          </v-card>
-        </div>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+              <v-card-actions class="d-flex align-end">
+                <v-spacer></v-spacer>
+                <v-btn flat @click="$store.commit('clearSearch')">Очистить</v-btn>
+                <v-btn color="primary" flat @click="$store.dispatch('findUsers')">Применить</v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
         </v-menu>
       </div>
 
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-export default{
-  
+export default {
+
 }
 
 </script>
