@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container fluid style="width:84vw;" elevation-2 class="mt-3">
+    <v-container fluid style="width:85vw;" elevation-2 class="mt-3">
       <v-container d-flex justify-space-between>
         <v-toolbar-title>Все<v-btn icon @click="$router.go(0)">
             <v-icon color="primary">refresh</v-icon>

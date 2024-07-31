@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-
-    <v-navigation-drawer v-show="$store.state.isShow" stateless value="true" class="mr-2 mt-3">
+    <v-navigation-drawer v-show="$store.state.isShow" stateless value="true" class="mr-2 mt-3" width="13vw">
       <v-container>
         <v-list d-flex>
           <v-list-group value="true" active-class="de" color="black">

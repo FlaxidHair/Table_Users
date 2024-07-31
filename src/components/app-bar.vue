@@ -4,24 +4,24 @@
       <v-app-bar-nav-icon @click="$store.commit('isShowing')"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <div class="text-xs-center">
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-y>
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200"  offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
+            <v-btn icon v-on="on" >
               <v-icon style="width:30px;height:30px;" class="white rounded-circle" color="#0F4C82">search</v-icon>
             </v-btn>
           </template>
           <div>
-            <v-card class="pa-5 d-flex flex-column" width="430px" height="80vh">
+            <v-card class="pa-5 d-flex flex-column" width="430px" height="90vh">
               <v-list class="mb-auto">
                 <v-list-tile>
                   <v-list-tile-content>
-                    <v-text-field outlined v-model="$store.state.fName" label="Имя"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.lName" label="Фамилия"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.company" label="Компания"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.jobTitle" label="Специальность"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.phone" label="Телефон"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.email" label="E-mail"></v-text-field>
-                    <v-text-field outlined v-model="$store.state.interest" label="Интересы"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.fName" label="Имя"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.lName" label="Фамилия"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.company" label="Компания"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.jobTitle" label="Специальность"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.phone" label="Телефон"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.email" label="E-mail"></v-text-field>
+                    <v-text-field dense outlined v-model="$store.state.interest" label="Интересы"></v-text-field>
                   </v-list-tile-content>
                 </v-list-tile>
               </v-list>

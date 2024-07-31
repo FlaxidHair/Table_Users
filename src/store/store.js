@@ -32,7 +32,7 @@ export default new Vuex.Store({
     isAdd: false,
     deleteItem: null,
     editItem: null,
-    isShow: false,
+    isShow: true,
     actionsSelect: null,
     itemChoose: ["Изменить", "Удалить", "Добавить"],
     nameHeaders: [
