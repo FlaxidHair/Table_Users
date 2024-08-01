@@ -1,7 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-
+import router from "../router/router";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -205,10 +205,17 @@ export default new Vuex.Store({
           .post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser)
           .then((response) => {
             if (response.status == 201) {
-              this.commit("AddClear");
-              state.dispatch("getUsers");
-              state.dispatch("getActiveUsers");
-              state.dispatch("getInactiveUsers");
+              if (router.history.current.name == "checked") {
+                state.dispatch("getActiveUsers");
+              }
+              if (router.history.current.name == "main") {
+                this.commit("AddClear");
+                state.dispatch("getUsers");
+              }
+              if (router.history.current.name == "noChecked") {
+                this.commit("AddClear");
+                state.dispatch("getInactiveUsers");
+              }
             }
           })
           .catch((error) => console.log(error));
@@ -221,9 +228,15 @@ export default new Vuex.Store({
         .then((response) => {
           alert("Пользователь удален");
           if (response.status == 200) {
-            state.dispatch("getUsers");
-            state.dispatch("getActiveUsers");
-            state.dispatch("getInactiveUsers");
+            if (router.history.current.name == "main") {
+              state.dispatch("getUsers");
+            }
+            if (router.history.current.name == "checked") {
+              state.dispatch("getActiveUsers");
+            }
+            if (router.history.current.name == "noChecked") {
+              state.dispatch("getInactiveUsers");
+            }
           }
         })
         .catch((error) => console.log(error));
@@ -234,9 +247,9 @@ export default new Vuex.Store({
           `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
           state.getters.getEditItem
         )
-        .then((response) =>
-          response.status == 200 ? alert("Пользователь изменен") : null
-        );
+        .then((response) => {
+          response.status == 200 ? alert("Пользователь изменен") : null;
+        });
     },
     findUsers(context) {
       this.commit("isShowingSearch");
