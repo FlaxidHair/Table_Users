@@ -3,7 +3,7 @@
     <v-container fluid style="width:85vw;" elevation-2 class="mt-3">
       <v-container d-flex justify-space-between rounded>
         <v-toolbar-title>Не обработанные
-          <v-btn icon @click="$router.go(0)">
+          <v-btn icon @click="$store.dispatch('getInactiveUsers')">
             <v-icon color="primary">refresh</v-icon>
           </v-btn>
         </v-toolbar-title>
@@ -20,7 +20,6 @@
           </v-col>
         </v-row>
       </v-container>
-      {{ $store.state.actionsSelect }}
       <div v-if="!$store.state.isFind">
         <v-data-table height="70vh" :headers="$store.state.itemsInner" :items="$store.getters.getUserssUnActive"
           :items-per-page="5" v-model="$store.state.selected" @click:row="$store.commit('rowClick', $event)">
@@ -38,6 +37,8 @@
 
 <script>
 export default {
-
+mounted() {
+  this.$store.dispatch('getInactiveUsers')
+}
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <v-container fluid style="width:85vw;" elevation-2 class="mt-3">
       <v-container d-flex justify-space-between>
-        <v-toolbar-title>Все<v-btn icon @click="$router.go(0)">
+        <v-toolbar-title>Все<v-btn icon @click="$store.dispatch('getUsers')">
             <v-icon color="primary">refresh</v-icon>
           </v-btn></v-toolbar-title>
         <v-row justify="end">
@@ -51,5 +51,8 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.dispatch("getUsers");
+  }
 }
 </script>
