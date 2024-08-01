@@ -10,21 +10,21 @@ const routes = [
   {
     path: "/",
     component: AllUsers,
-    name:"main"
+    name: "main",
   },
   {
     path: "/Checked",
     component: Checked,
-    name:"checked"
+    name: "checked",
   },
   {
     path: "/NoChecked",
     component: noChecked,
-    name:"noChecked"
+    name: "noChecked",
   },
 ];
 
-export default  new VueRouter({
+export default new VueRouter({
   mode: "hash",
   routes,
 });

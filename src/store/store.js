@@ -2,8 +2,7 @@ import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
 
-
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -107,8 +106,8 @@ export default new Vuex.Store({
         ? (state.isFind = true)
         : (state.isFind = false);
     },
-    refreshFind(state){
-      state.isFind = false
+    refreshFind(state) {
+      state.isFind = false;
     },
     clearSearch(state) {
       state.fName = "";
@@ -133,11 +132,11 @@ export default new Vuex.Store({
     setUser(state, payload) {
       state.items = payload;
     },
-    payloadActiveUsers(state,payload){
-      state.activeItems = payload
+    payloadActiveUsers(state, payload) {
+      state.activeItems = payload;
     },
-    payloadInActiveUsers(state,payload){
-      state.unActiveItems = payload
+    payloadInActiveUsers(state, payload) {
+      state.unActiveItems = payload;
     },
     finded(state, payload) {
       state.findedPerson = payload;
@@ -173,69 +172,71 @@ export default new Vuex.Store({
   },
 
   actions: {
-    getActiveUsers(context){
+    getActiveUsers(context) {
       axios
-      .get("https://retoolapi.dev/1KJKFH/data?status=true")
-      .then((response) => context.commit("payloadActiveUsers", response.data)).catch((error)=>console.log(error));
-      this.commit('refreshFind')
+        .get("https://retoolapi.dev/1KJKFH/data?status=true")
+        .then((response) => context.commit("payloadActiveUsers", response.data))
+        .catch((error) => console.log(error));
+      this.commit("refreshFind");
     },
-    getInactiveUsers(context){
-      axios.get("https://retoolapi.dev/1KJKFH/data?status=false")
-      .then((response) => context.commit("payloadInActiveUsers", response.data)).catch((error)=>console.log(error));
-      this.commit('refreshFind')
+    getInactiveUsers(context) {
+      axios
+        .get("https://retoolapi.dev/1KJKFH/data?status=false")
+        .then((response) =>
+          context.commit("payloadInActiveUsers", response.data)
+        )
+        .catch((error) => console.log(error));
+      this.commit("refreshFind");
     },
     getUsers(context) {
       axios
         .get("https://retoolapi.dev/1KJKFH/data")
-        .then((response) => {context.commit("setUser", response.data)
-        }).catch((error)=>console.log(error));
-        this.commit('refreshFind')
+        .then((response) => {
+          context.commit("setUser", response.data);
+        })
+        .catch((error) => console.log(error));
+      this.commit("refreshFind");
     },
     addNewUser(state) {
       if (Object.values(state.getters.getNewUser).includes("")) {
         return;
       } else {
-          axios
-          .post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser).then(response=>{
-            if(response.status==201){
-              this.commit('AddClear')
-              state.dispatch('getUsers')
-              state.dispatch('getActiveUsers')
-              state.dispatch('getInactiveUsers')
+        axios
+          .post("https://retoolapi.dev/1KJKFH/data", state.getters.getNewUser)
+          .then((response) => {
+            if (response.status == 201) {
+              this.commit("AddClear");
+              state.dispatch("getUsers");
+              state.dispatch("getActiveUsers");
+              state.dispatch("getInactiveUsers");
             }
-          }).catch((error)=>console.log(error))
-          alert('Пользователь добавлен')
-          
+          })
+          .catch((error) => console.log(error));
+        alert("Пользователь добавлен");
       }
     },
     deleteUsers(state) {
       axios
         .delete(`https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`)
         .then((response) => {
-          alert("Пользователь удален")
-          if(response.status==200) {
-            state.dispatch('getUsers')
-            state.dispatch('getActiveUsers')
-            state.dispatch('getInactiveUsers')
+          alert("Пользователь удален");
+          if (response.status == 200) {
+            state.dispatch("getUsers");
+            state.dispatch("getActiveUsers");
+            state.dispatch("getInactiveUsers");
           }
         })
-        .catch((error) => console.log(error))
-        
+        .catch((error) => console.log(error));
     },
     editUsers(state) {
       axios
         .patch(
           `https://retoolapi.dev/1KJKFH/data/${state.getters.getId}`,
           state.getters.getEditItem
-        ).then((response)=>{
-          if(response.status==200){
-            alert("Пользователь изменен");
-            state.dispatch('getUsers')
-            state.dispatch('getActiveUsers')
-            state.dispatch('getInactiveUsers')
-          }
-        })
-
+        )
+        .then((response) =>
+          response.status == 200 ? alert("Пользователь изменен") : null
+        );
     },
     findUsers(context) {
       this.commit("isShowingSearch");
