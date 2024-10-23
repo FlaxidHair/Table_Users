@@ -9,7 +9,6 @@
           <AppAside class="mr-auto"></AppAside>
           <div class="d-flex justify-end">
             <router-view></router-view>
-
           </div>
         </v-flex>
       </div>
