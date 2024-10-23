@@ -51,7 +51,10 @@ export default {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.deleteCookie('userToken')
-        this.$router.push('/404')
+        if (this.$route.path !== '/unknown') {
+          this.$router.push('/unknown')
+        }
+
       }, 10000)
     }
   },

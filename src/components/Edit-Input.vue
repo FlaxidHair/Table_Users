@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <v-form>
             <v-dialog v-model="$store.state.isEdit" width="600">
                 <v-card style="padding:20px;">
                     <v-text-field outlined v-model="$store.getters.getEditItem.firstName" label="Имя"></v-text-field>
@@ -18,7 +18,7 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-        </div>
+        </v-form>
     </div>
 </template>
 
