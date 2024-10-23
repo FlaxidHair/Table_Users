@@ -24,11 +24,51 @@ import EditInput from "./components/Edit-Input.vue";
 import AddInput from "./components/Add-input.vue";
 export default {
   name: "App",
+  data () {
+    return {
+      timeout: null,
+    }
+  },
   components: {
     Appbar,
     AppAside,
     EditInput,
     AddInput,
   },
+  methods: {
+    generateToken () {
+      const token = Math.random().toString(36).substr(2,9)
+      this.setCookie('userToken', token, 1)
+    },
+    setCookie(name,value,day) {
+      const expires = new Date(Date.now() + day * (1000*60*60*24))
+      document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`
+    },
+    deleteCookie(name) {
+      this.setCookie(name,'',-1)
+    },
+    resetTimer () {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.deleteCookie('userToken')
+        this.$router.push('/404')
+      }, 10000)
+    }
+  },
+  mounted () {
+    this.generateToken()
+    this.resetTimer()
+
+    window.addEventListener('mousemove', this.resetTimer);
+    window.addEventListener('keydown', this.resetTimer);
+    window.addEventListener('scroll', this.resetTimer);
+    window.addEventListener('click', this.resetTimer);
+  },
+  beforeDestroy() {
+    window.removeEventListener('mousemove', this.resetTimer);
+    window.removeEventListener('keydown', this.resetTimer);
+    window.removeEventListener('scroll', this.resetTimer);
+    window.removeEventListener('click', this.resetTimer);
+  }
 };
 </script>

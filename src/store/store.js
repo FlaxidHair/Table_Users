@@ -170,7 +170,6 @@ export default new Vuex.Store({
       }
     },
   },
-
   actions: {
     getActiveUsers(context) {
       axios
